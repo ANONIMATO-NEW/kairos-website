@@ -11,60 +11,71 @@
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.05); }
+    }
     .black-hole-core {
-      background: radial-gradient(circle, #000000 60%, #030712 100%);
-      box-shadow: 0 0 80px 30px rgba(59, 130, 246, 0.5), inset 0 0 50px #000;
+      background: radial-gradient(circle, #000000 50%, #030712 90%, #1e3a8a 100%);
+      box-shadow: 0 0 100px 40px rgba(59, 130, 246, 0.6), inset 0 0 60px #000;
     }
     .black-hole-ring {
-      border: 2px solid rgba(59, 130, 246, 0.4);
+      border: 3px solid rgba(59, 130, 246, 0.5);
       border-top-color: #3b82f6;
-      border-bottom-color: #60a5fa;
-      animation: spin-slow 15s linear infinite;
+      border-bottom-color: #93c5fd;
+      animation: spin-slow 12s linear infinite;
     }
-    .glow-effect {
-      box-shadow: 0 0 30px -5px rgba(59, 130, 246, 0.35);
+    .accretion-disk {
+      box-shadow: 0 0 50px 15px rgba(59, 130, 246, 0.4);
     }
-    /* Efeito de distorção e lentes gravitacionais nos elementos */
+    /* Efeito imersivo de distorção de lentes gravitacionais */
     .gravitational-lens {
-      backdrop-filter: blur(12px);
-      background: rgba(3, 7, 18, 0.75);
-      border: 1px solid rgba(59, 130, 246, 0.2);
+      backdrop-filter: blur(16px);
+      background: rgba(3, 7, 18, 0.82);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+    }
+    .portal-distortion {
+      transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), filter 1.2s ease, opacity 1s ease;
     }
     html { scroll-behavior: smooth; }
   </style>
 </head>
 <body class="bg-gray-950 text-gray-100 font-sans antialiased selection:bg-blue-600 selection:text-white">
 
-  <!-- ==================== EXPERIENCE PORTAL (INTRODUÇÃO COM VÍDEO DO BURACO NEGRO) ==================== -->
-  <div id="intro-portal" class="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center overflow-hidden transition-opacity duration-1000">
-    <!-- Vídeo de fundo imersivo do buraco negro -->
-    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-60 scale-105 filter contrast-125">
-      <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+  <!-- ==================== PORTAL DE INTRODUÇÃO (VÍDEO + DISTORÇÃO) ==================== -->
+  <div id="intro-portal" class="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center overflow-hidden portal-distortion">
+    <!-- Vídeo de fundo real do buraco negro -->
+    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-75 scale-110 filter contrast-125 brightness-90">
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-a-black-hole-42998-large.mp4" type="video/mp4">
+      Seu navegador não suporta vídeos.
     </video>
-    <!-- Sobreposição com vinheta escura para dar profundidade e efeito de abismo -->
-    <div class="absolute inset-0 bg-gradient-to-radial from-transparent via-gray-950/80 to-black pointer-events-none"></div>
+    
+    <!-- Vinheta e camadas de luz de acreção para maior imersão -->
+    <div class="absolute inset-0 bg-gradient-to-radial from-blue-950/30 via-black/80 to-black pointer-events-none"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_20%,_rgba(0,0,0,0.9)_90%)] pointer-events-none"></div>
     
     <div class="relative z-10 text-center px-4 max-w-xl">
-      <!-- Símbolo Buraco Negro / Logo Provisória -->
-      <div class="relative w-44 h-44 mx-auto mb-8 flex items-center justify-center">
+      <div class="relative w-48 h-48 mx-auto mb-8 flex items-center justify-center">
         <div class="absolute inset-0 rounded-full black-hole-ring"></div>
-        <div class="w-32 h-32 rounded-full black-hole-core flex items-center justify-center relative">
-          <span class="text-blue-400 font-bold tracking-widest text-xl">KAIROS</span>
+        <div class="absolute inset-2 rounded-full border border-blue-400/30 animate-pulse"></div>
+        <div class="w-32 h-32 rounded-full black-hole-core flex items-center justify-center relative accretion-disk">
+          <span class="text-blue-400 font-black tracking-widest text-xl drop-shadow-[0_0_10px_rgba(59,130,246,0.8)]">KAIROS</span>
         </div>
       </div>
       
-      <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4 drop-shadow-lg">
-        Universo <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">Kairos</span>
+      <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight mb-4 drop-shadow-[0_5px_15px_rgba(0,0,0,0.9)]">
+        Horizonte de <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-600">Eventos</span>
       </h1>
-      <p class="text-gray-300 text-lg mb-8 drop-shadow">
-        Atraia novos clientes e profissionalize a sua loja com uma presença digital de outra galáxia.
+      <p class="text-gray-300 text-lg mb-8 drop-shadow-md">
+        Ultrapasse a gravidade digital. Profissionalize sua loja com uma presença de outra galáxia.
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <button onclick="enterSite()" class="w-full sm:w-auto px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/40 transition-all transform hover:scale-105">
-          Entrar no Horizonte de Eventos
+        <button onclick="enterSite()" class="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl shadow-lg shadow-blue-600/50 transition-all transform hover:scale-105 border border-blue-400/40">
+          Entrar no Buraco Negro
         </button>
-        <button onclick="skipIntro()" class="text-gray-400 hover:text-white text-sm underline underline-offset-4 py-2">
+        <button onclick="enterSite()" class="text-gray-400 hover:text-white text-sm underline underline-offset-4 py-2">
           Pular introdução
         </button>
       </div>
@@ -72,96 +83,102 @@
   </div>
 
   <!-- ==================== HEADER / NAV ==================== -->
-  <header class="sticky top-0 z-40 bg-gray-950/80 backdrop-blur-md border-b border-gray-800/80">
+  <header class="sticky top-0 z-40 bg-gray-950/85 backdrop-blur-md border-b border-blue-950/50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-full bg-blue-600/20 border border-blue-500/50 flex items-center justify-center">
-          <div class="w-4 h-4 rounded-full bg-blue-500"></div>
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-9 h-9 rounded-full bg-blue-600/20 border border-blue-500/60 flex items-center justify-center group-hover:scale-110 transition-transform">
+          <div class="w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_10px_#3b82f6]"></div>
         </div>
         <span class="font-bold text-xl tracking-wider text-white">KAIROS</span>
       </a>
 
       <nav class="hidden md:flex items-center gap-8">
         <a href="#inicio" class="text-sm font-medium text-gray-300 hover:text-blue-400 transition-colors">Início</a>
-        <a href="#quem-somos" class="text-sm font-medium text-gray-300 hover:text-blue-400 transition-colors">Quem Somos</a>
-        <a href="#pacotes" class="text-sm font-medium text-gray-300 hover:text-blue-400 transition-colors">Pacotes</a>
+        <a href="#quem-somos" class="text-sm font-medium text-gray-300 hover:text-blue-400 transition-colors">Gravidade</a>
+        <a href="#pacotes" class="text-sm font-medium text-gray-300 hover:text-blue-400 transition-colors">Pacotes Estelares</a>
         <a href="#contato" class="text-sm font-medium text-gray-300 hover:text-blue-400 transition-colors">Contato</a>
       </nav>
 
       <div class="flex items-center gap-4">
-        <button onclick="openAdminModal()" class="text-xs px-3 py-1.5 rounded-lg border border-gray-700 text-gray-400 hover:text-white hover:border-gray-500 transition-all flex items-center gap-1.5">
+        <button onclick="openAdminModal()" class="text-xs px-3 py-1.5 rounded-lg border border-blue-900/60 bg-blue-950/30 text-blue-300 hover:text-white hover:border-blue-500 transition-all flex items-center gap-1.5">
           <i data-lucide="lock" class="w-3.5 h-3.5"></i> Admin
         </button>
-        <a href="#pacotes" class="hidden sm:inline-flex text-xs font-semibold px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-600/20 transition-all">
-          Ver Pacotes
+        <a href="#pacotes" class="hidden sm:inline-flex text-xs font-semibold px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-600/30 transition-all">
+          Explorar
         </a>
       </div>
     </div>
   </header>
 
-  <!-- ==================== MAIN CONTENT ==================== -->
-  <main class="relative">
-    <!-- Fundo espacial com atmosfera de buraco negro vivo -->
-    <div class="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900 via-gray-950 to-black -z-10"></div>
+  <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+  <main class="relative overflow-hidden">
+    <!-- Elementos visuais de fundo espacial contínuo -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-600/10 blur-[150px] pointer-events-none rounded-full -z-10"></div>
+    <div class="absolute top-[40%] right-[-10%] w-[600px] h-[600px] bg-indigo-900/10 blur-[180px] pointer-events-none rounded-full -z-10"></div>
 
     <!-- HERO SECTION -->
-    <section id="inicio" class="relative py-24 md:py-32 overflow-hidden border-b border-gray-900">
+    <section id="inicio" class="relative py-24 md:py-36 border-b border-gray-900/80">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        <span class="inline-block px-3.5 py-1 rounded-full text-xs font-semibold bg-blue-950/80 text-blue-400 border border-blue-800/50 mb-6">
-          Especialistas em Presença Digital
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-blue-950/90 text-blue-300 border border-blue-700/40 mb-6 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+          <span class="w-2 h-2 rounded-full bg-blue-400 animate-ping"></span> Singularidade em Presença Digital
         </span>
         <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight max-w-4xl mx-auto mb-6">
-          Profissionalize sua loja com um site moderno, rápido e focado em vendas.
+          Atraia todos os olhares com uma gravidade digital incomparável.
         </h1>
         <p class="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto mb-10">
-          A Kairos constrói a presença digital ideal para o seu negócio sair do amadorismo e transmitir total credibilidade aos seus clientes.
+          A Kairos absorve o amadorismo da sua loja e transforma em uma estrutura elegante, veloz e magnética para conversão de vendas.
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <a href="#pacotes" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/25 transition-all text-center">
-            Conhecer Pacotes
+          <a href="#pacotes" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/30 transition-all text-center">
+            Ver Pacotes Estelares
           </a>
-          <a href="https://wa.me/558193858571?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20Kairos." target="_blank" class="px-8 py-4 bg-gray-900 hover:bg-gray-800 text-gray-200 border border-gray-800 font-semibold rounded-xl transition-all text-center flex items-center justify-center gap-2">
-            <i data-lucide="message-circle" class="w-5 h-5 text-green-400"></i> Falar no WhatsApp
+          <a href="https://wa.me/558193858571?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20Kairos." target="_blank" class="px-8 py-4 bg-gray-900 hover:bg-gray-800 text-gray-200 border border-blue-950 font-semibold rounded-xl transition-all text-center flex items-center justify-center gap-2">
+            <i data-lucide="message-circle" class="w-5 h-5 text-green-400"></i> WhatsApp Direto
           </a>
         </div>
       </div>
     </section>
 
-    <!-- QUEM SOMOS -->
-    <section id="quem-somos" class="py-20 bg-gray-900/30 border-b border-gray-900">
+    <!-- QUEM SOMOS / O FENÔMENO KAIROS -->
+    <section id="quem-somos" class="py-24 bg-gradient-to-b from-gray-950 via-gray-900/40 to-gray-950 border-b border-gray-900/80">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-2 gap-12 items-center">
           <div>
             <h2 class="text-3xl font-bold text-white mb-6" id="display-about-title">Quem Somos</h2>
             <p class="text-gray-300 leading-relaxed mb-6" id="display-about-text">
-              Somos uma agência de criação de sites em plena expansão, focada em transformar negócios e lojistas que desejam profissionalizar sua marca no ambiente digital. Nosso objetivo é entregar sites elegantes, velozes e sob medida para impulsionar a confiança e o resultado das suas vendas.
+              Assim como um buraco negro retorce a luz ao seu redor, a Kairos distorce o mercado digital a favor da sua loja. Criamos ecossistemas web de alta performance que centralizam a atenção dos seus clientes e multiplicam os resultados da sua marca.
             </p>
             <div class="grid grid-cols-2 gap-4">
-              <div class="p-4 rounded-xl gravitational-lens">
-                <h3 class="text-blue-400 font-bold text-xl">100%</h3>
-                <p class="text-gray-400 text-sm">Foco em Performance</p>
+              <div class="p-5 rounded-xl gravitational-lens">
+                <h3 class="text-blue-400 font-extrabold text-2xl">100%</h3>
+                <p class="text-gray-400 text-xs mt-1">Força Gravitacional de Vendas</p>
               </div>
-              <div class="p-4 rounded-xl gravitational-lens">
-                <h3 class="text-blue-400 font-bold text-xl">Sob Medida</h3>
-                <p class="text-gray-400 text-sm">Para o seu Negócio</p>
+              <div class="p-5 rounded-xl gravitational-lens">
+                <h3 class="text-blue-400 font-extrabold text-2xl">Ótima</h3>
+                <p class="text-gray-400 text-xs mt-1">Velocidade de Órbitas</p>
               </div>
             </div>
           </div>
           <div class="relative flex items-center justify-center">
-            <div class="w-64 h-64 rounded-full bg-gradient-to-tr from-blue-900/40 to-indigo-900/20 border border-blue-500/30 flex items-center justify-center glow-effect">
-              <i data-lucide="rocket" class="w-24 h-24 text-blue-400"></i>
+            <!-- Visual de Simulação de Buraco Negro na Seção -->
+            <div class="relative w-72 h-72 rounded-full flex items-center justify-center">
+              <div class="absolute inset-0 rounded-full black-hole-ring opacity-75"></div>
+              <div class="w-48 h-48 rounded-full black-hole-core flex items-center justify-center relative shadow-[0_0_50px_rgba(59,130,246,0.4)]">
+                <i data-lucide="orbit" class="w-16 h-16 text-blue-400 animate-spin" style="animation-duration: 20s;"></i>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PACOTES / SERVIÇOS -->
-    <section id="pacotes" class="py-24 border-b border-gray-900">
+    <!-- PACOTES / ÓRBITAS DE SERVIÇOS -->
+    <section id="pacotes" class="py-24 border-b border-gray-900/80">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-2xl mx-auto mb-16">
-          <h2 class="text-3xl font-bold text-white mb-4">Pacotes de Criação de Sites</h2>
-          <p class="text-gray-400">Escolha o formato ideal para estruturar a presença online da sua loja.</p>
+          <span class="text-blue-400 font-semibold text-xs tracking-widest uppercase mb-2 block">Planos Dimensionais</span>
+          <h2 class="text-3xl font-bold text-white mb-4">Pacotes de Criação Kairos</h2>
+          <p class="text-gray-400">Escolha o nível de expansão ideal para gravitar sua loja no topo do digital.</p>
         </div>
 
         <div id="packages-container" class="grid md:grid-cols-3 gap-8">
@@ -170,14 +187,14 @@
       </div>
     </section>
 
-    <!-- CONTATO & FORMULÁRIO -->
-    <section id="contato" class="py-24 bg-gray-900/20">
+    <!-- CONTATO -->
+    <section id="contato" class="py-24 bg-gradient-to-t from-gray-950 via-gray-900/20 to-gray-950">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-2 gap-12">
           <div>
-            <h2 class="text-3xl font-bold text-white mb-4">Entre em Contato</h2>
+            <h2 class="text-3xl font-bold text-white mb-4">Entre em Órbita</h2>
             <p class="text-gray-400 mb-8">
-              Pronto para dar o próximo passo? Tire suas dúvidas ou solicite um orçamento direto com nossa equipe.
+              Pronto para puxar novos clientes para o seu negócio? Conecte-se diretamente com nossa equipe.
             </p>
 
             <div class="space-y-6">
@@ -186,7 +203,7 @@
                   <i data-lucide="phone" class="w-6 h-6 text-green-400"></i>
                 </div>
                 <div>
-                  <p class="text-xs text-gray-400">WhatsApp / Telefone</p>
+                  <p class="text-xs text-gray-400">WhatsApp Oficial</p>
                   <a href="https://wa.me/558193858571" target="_blank" class="text-white font-semibold hover:text-blue-400">
                     +55 (81) 9385-8571
                   </a>
@@ -198,17 +215,7 @@
                   <i data-lucide="mail" class="w-6 h-6 text-blue-400"></i>
                 </div>
                 <div>
-                  <p class="text-xs text-gray-400">E-mail Institucional</p>
-                  <p class="text-gray-300 font-semibold">[A definir]</p>
-                </div>
-              </div>
-
-              <div class="flex items-center gap-4 p-4 rounded-xl gravitational-lens">
-                <div class="w-12 h-12 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
-                  <i data-lucide="map-pin" class="w-6 h-6 text-indigo-400"></i>
-                </div>
-                <div>
-                  <p class="text-xs text-gray-400">Endereço</p>
+                  <p class="text-xs text-gray-400">E-mail Setorial</p>
                   <p class="text-gray-300 font-semibold">[A definir]</p>
                 </div>
               </div>
@@ -217,25 +224,25 @@
 
           <!-- Formulário -->
           <div class="gravitational-lens p-8 rounded-2xl">
-            <h3 class="text-xl font-bold text-white mb-6">Envie uma mensagem</h3>
+            <h3 class="text-xl font-bold text-white mb-6">Mande sua mensagem</h3>
             <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
               <div>
                 <label class="block text-xs font-semibold text-gray-400 mb-1">Nome completo</label>
                 <input type="text" id="contact-name" required class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-blue-500 transition-colors" placeholder="Seu nome">
               </div>
               <div>
-                <label class="block text-xs font-semibold text-gray-400 mb-1">E-mail ou WhatsApp</label>
-                <input type="text" id="contact-info" required class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-blue-500 transition-colors" placeholder="(81) 99999-9999 ou seu@email.com">
+                <label class="block text-xs font-semibold text-gray-400 mb-1">WhatsApp ou E-mail</label>
+                <input type="text" id="contact-info" required class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-blue-500 transition-colors" placeholder="(81) 99999-9999">
               </div>
               <div>
                 <label class="block text-xs font-semibold text-gray-400 mb-1">Mensagem</label>
-                <textarea id="contact-message" rows="4" required class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-blue-500 transition-colors" placeholder="Conte-nos sobre a sua loja..."></textarea>
+                <textarea id="contact-message" rows="4" required class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-blue-500 transition-colors" placeholder="Detalhes da sua loja..."></textarea>
               </div>
 
               <div id="form-alert" class="hidden p-4 rounded-xl text-sm font-medium"></div>
 
               <button type="submit" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2">
-                <i data-lucide="send" class="w-4 h-4"></i> Enviar Mensagem
+                <i data-lucide="send" class="w-4 h-4"></i> Transmitir Mensagem
               </button>
             </form>
           </div>
@@ -245,26 +252,24 @@
   </main>
 
   <!-- ==================== FOOTER ==================== -->
-  <footer class="border-t border-gray-900 py-12 bg-gray-950">
+  <footer class="border-t border-gray-900 py-10 bg-gray-950">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
       <div class="flex items-center gap-3">
-        <div class="w-6 h-6 rounded-full bg-blue-600"></div>
+        <div class="w-6 h-6 rounded-full bg-blue-600 shadow-[0_0_10px_#3b82f6]"></div>
         <span class="font-bold text-lg text-white">KAIROS</span>
       </div>
       <p class="text-gray-500 text-sm">
-        © <span id="current-year"></span> Kairos. Todos os direitos reservados.
+        © <span id="current-year"></span> Kairos. Todos os direitos reservados no horizonte de eventos.
       </p>
       <div class="flex gap-4 text-gray-400 text-sm">
         <a href="https://wa.me/558193858571" target="_blank" class="hover:text-white">WhatsApp</a>
-        <span class="text-gray-700">•</span>
-        <span class="text-gray-600">Redes sociais: [A definir]</span>
       </div>
     </div>
   </footer>
 
-  <!-- ==================== PAINEL ADMINISTRATIVO (MODAL MODERNO) ==================== -->
+  <!-- ==================== PAINEL ADMINISTRATIVO (MODAL) ==================== -->
   <div id="admin-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-gray-950 border border-gray-800 w-full max-w-3xl rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+    <div class="bg-gray-950 border border-blue-900/50 w-full max-w-3xl rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
       
       <div class="px-6 py-4 border-b border-gray-800 flex items-center justify-between bg-gray-900/50">
         <div class="flex items-center gap-2">
@@ -280,23 +285,21 @@
       <div id="admin-auth" class="p-8 text-center">
         <i data-lucide="lock" class="w-12 h-12 text-blue-500 mx-auto mb-4"></i>
         <h4 class="text-xl font-bold text-white mb-2">Acesso Restrito</h4>
-        <p class="text-gray-400 text-sm mb-6">Digite a chave mestra para gerenciar o conteúdo do site.</p>
+        <p class="text-gray-400 text-sm mb-6">Digite a senha mestra para gerenciar os dados do site.</p>
         
         <div class="max-w-xs mx-auto space-y-4">
-          <input type="password" id="admin-pass" class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white text-center focus:outline-none focus:border-blue-500" placeholder="Senha do painel">
+          <input type="password" id="admin-pass" class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white text-center focus:outline-none focus:border-blue-500" placeholder="Senha">
           <button onclick="verifyAdminPass()" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition-all">
             Entrar no Painel
           </button>
-          <p id="admin-auth-error" class="text-red-400 text-xs hidden">Senha incorreta. Tente novamente.</p>
+          <p id="admin-auth-error" class="text-red-400 text-xs hidden">Senha incorreta.</p>
         </div>
       </div>
 
       <!-- DASHBOARD CONTENT -->
       <div id="admin-dashboard" class="hidden flex-1 overflow-y-auto p-6 space-y-8">
-        
-        <!-- Institucional -->
         <div class="space-y-4">
-          <h4 class="text-lg font-bold text-blue-400 border-b border-gray-800 pb-2">Textos Institucionais</h4>
+          <h4 class="text-lg font-bold text-blue-400 border-b border-gray-800 pb-2">Textos Principais</h4>
           <div>
             <label class="block text-xs font-semibold text-gray-400 mb-1">Título Quem Somos</label>
             <input type="text" id="admin-about-title" class="w-full px-4 py-2.5 rounded-xl bg-gray-900 border border-gray-800 text-white">
@@ -307,29 +310,21 @@
           </div>
         </div>
 
-        <!-- Gerenciar Pacotes -->
         <div class="space-y-4">
-          <div class="flex items-center justify-between border-b border-gray-800 pb-2">
-            <h4 class="text-lg font-bold text-blue-400">Gerenciar Pacotes</h4>
-          </div>
+          <h4 class="text-lg font-bold text-blue-400 border-b border-gray-800 pb-2">Gerenciar Pacotes</h4>
           <div id="admin-packages-list" class="space-y-4"></div>
         </div>
 
         <div class="pt-4 border-t border-gray-800 flex justify-end gap-4">
-          <button onclick="closeAdminModal()" class="px-6 py-2.5 rounded-xl border border-gray-800 text-gray-300 hover:bg-gray-900">
-            Cancelar
-          </button>
-          <button onclick="saveAdminChanges()" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold">
-            Salvar Alterações
-          </button>
+          <button onclick="closeAdminModal()" class="px-6 py-2.5 rounded-xl border border-gray-800 text-gray-300 hover:bg-gray-900">Cancelar</button>
+          <button onclick="saveAdminChanges()" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold">Salvar Alterações</button>
         </div>
-
       </div>
 
     </div>
   </div>
 
-  <!-- ==================== DETALHES DO PACOTE (MODAL) ==================== -->
+  <!-- ==================== MODAL DE PACOTE ==================== -->
   <div id="package-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="gravitational-lens w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl p-6 sm:p-8 relative">
       <button onclick="closePackageModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
@@ -339,60 +334,57 @@
       <span id="pkg-modal-tag" class="text-xs font-bold text-blue-400 bg-blue-950 border border-blue-800/50 px-3 py-1 rounded-full inline-block mb-3"></span>
       <h3 id="pkg-modal-title" class="text-2xl font-bold text-white mb-2"></h3>
       <p id="pkg-modal-price" class="text-blue-400 font-extrabold text-xl mb-4"></p>
-      
       <p id="pkg-modal-desc" class="text-gray-300 text-sm leading-relaxed mb-6"></p>
 
       <div class="space-y-4 mb-8">
-        <h4 class="text-sm font-semibold text-white uppercase tracking-wider">O que está incluído:</h4>
+        <h4 class="text-sm font-semibold text-white uppercase tracking-wider">Incluído na órbita:</h4>
         <ul id="pkg-modal-features" class="space-y-2 text-sm text-gray-300"></ul>
       </div>
 
-      <div class="flex flex-col sm:flex-row gap-4">
-        <a id="pkg-whatsapp-btn" href="#" target="_blank" class="flex-1 py-3.5 bg-green-600 hover:bg-green-500 text-white font-semibold rounded-xl text-center shadow-lg shadow-green-600/20 transition-all flex items-center justify-center gap-2">
-          <i data-lucide="message-circle" class="w-5 h-5"></i> Quero este pacote
-        </a>
-        <a href="#contato" onclick="closePackageModal()" class="py-3.5 px-6 bg-gray-900 border border-gray-800 text-gray-300 hover:text-white rounded-xl text-center font-medium">
-          Outra dúvida
-        </a>
-      </div>
+      <a id="pkg-whatsapp-btn" href="#" target="_blank" class="w-full py-3.5 bg-green-600 hover:bg-green-500 text-white font-semibold rounded-xl text-center shadow-lg shadow-green-600/20 transition-all flex items-center justify-center gap-2">
+        <i data-lucide="message-circle" class="w-5 h-5"></i> Quero este pacote
+      </a>
     </div>
   </div>
 
   <!-- ==================== SCRIPTS ==================== -->
   <script>
-    lucide.createIcons();
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+      renderSiteContent();
+    });
 
     const initialData = {
       aboutTitle: "Quem Somos",
-      aboutText: "Somos uma agência de criação de sites em plena expansão, focada em transformar negócios e lojistas que desejam profissionalizar sua marca no ambiente digital. Nosso objetivo é entregar sites elegantes, velozes e sob medida para impulsionar a confiança e o resultado das suas vendas.",
+      aboutText: "Assim como um buraco negro retorce a luz ao seu redor, a Kairos distorce o mercado digital a favor da sua loja. Criamos ecossistemas web de alta performance que centralizam a atenção dos seus clientes e multiplicam os resultados da sua marca.",
       packages: [
         {
           id: 'basico',
-          name: 'Pacote Básico',
+          name: 'Órbita Básica',
           price: 'A definir',
-          summary: 'Ideal para iniciar sua presença digital de forma simples e direta.',
+          summary: 'Ideal para iniciar sua presença digital com estabilidade e design magnético.',
           deliverables: 'Layout responsivo, integração com WhatsApp, formulário de contato.',
           deadline: 'A definir',
-          whatsappMsg: 'Olá Kairos! Gostaria de saber mais sobre o Pacote Básico.'
+          whatsappMsg: 'Olá Kairos! Gostaria de saber mais sobre a Órbita Básica.'
         },
         {
           id: 'medio',
-          name: 'Pacote Médio',
+          name: 'Órbita Média',
           price: 'A definir',
-          summary: 'Estrutura completa para lojas que precisam de autoridade e mais seções.',
-          deliverables: 'Design personalizado, seções completas de serviços, integração social.',
+          summary: 'Estrutura completa para lojas que exigem autoridade e maior conversão.',
+          deliverables: 'Design personalizado, seções completas, integração social avançada.',
           deadline: 'A definir',
-          whatsappMsg: 'Olá Kairos! Gostaria de saber mais sobre o Pacote Médio.'
+          whatsappMsg: 'Olá Kairos! Gostaria de saber mais sobre a Órbita Média.'
         },
         {
           id: 'pro',
-          name: 'Pacote Pro',
+          name: 'Órbita Pro',
           price: 'A definir',
-          summary: 'Solução robusta e personalizada para máxima conversão da sua empresa.',
-          deliverables: 'Painel completo, design exclusivo, otimização de SEO e performance.',
+          summary: 'Solução robusta e exclusiva para máxima dominação de mercado da sua empresa.',
+          deliverables: 'Painel completo, design exclusivo, otimização extrema e SEO.',
           deadline: 'A definir',
-          whatsappMsg: 'Olá Kairos! Gostaria de saber mais sobre o Pacote Pro.'
+          whatsappMsg: 'Olá Kairos! Gostaria de saber mais sobre a Órbita Pro.'
         }
       ]
     };
@@ -409,46 +401,50 @@
 
     function renderSiteContent() {
       const data = getData();
-      document.getElementById('display-about-title').textContent = data.aboutTitle;
-      document.getElementById('display-about-text').textContent = data.aboutText;
+      const titleEl = document.getElementById('display-about-title');
+      const textEl = document.getElementById('display-about-text');
+      if (titleEl) titleEl.textContent = data.aboutTitle;
+      if (textEl) textEl.textContent = data.aboutText;
 
       const container = document.getElementById('packages-container');
-      container.innerHTML = data.packages.map(pkg => `
-        <div class="gravitational-lens rounded-2xl p-8 hover:border-blue-500/50 transition-all flex flex-col justify-between glow-effect">
-          <div>
-            <h3 class="text-2xl font-bold text-white mb-2">${pkg.name}</h3>
-            <p class="text-blue-400 font-extrabold text-2xl mb-4">${pkg.price}</p>
-            <p class="text-gray-400 text-sm mb-6">${pkg.summary}</p>
-            
-            <div class="space-y-3 border-t border-gray-900 pt-6 mb-8 text-sm">
-              <div class="flex items-start gap-2">
-                <i data-lucide="check-circle" class="w-4 h-4 text-blue-400 shrink-0 mt-0.5"></i>
-                <span class="text-gray-300"><strong>Entregáveis:</strong> ${pkg.deliverables}</span>
-              </div>
-              <div class="flex items-start gap-2">
-                <i data-lucide="clock" class="w-4 h-4 text-blue-400 shrink-0 mt-0.5"></i>
-                <span class="text-gray-300"><strong>Prazo:</strong> ${pkg.deadline}</span>
+      if (container) {
+        container.innerHTML = data.packages.map(pkg => `
+          <div class="gravitational-lens rounded-2xl p-8 hover:border-blue-500/60 transition-all flex flex-col justify-between shadow-lg">
+            <div>
+              <h3 class="text-2xl font-bold text-white mb-2">${pkg.name}</h3>
+              <p class="text-blue-400 font-extrabold text-2xl mb-4">${pkg.price}</p>
+              <p class="text-gray-400 text-sm mb-6">${pkg.summary}</p>
+              
+              <div class="space-y-3 border-t border-gray-900/80 pt-6 mb-8 text-sm">
+                <div class="flex items-start gap-2">
+                  <i data-lucide="check-circle" class="w-4 h-4 text-blue-400 shrink-0 mt-0.5"></i>
+                  <span class="text-gray-300"><strong>Entregáveis:</strong> ${pkg.deliverables}</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <i data-lucide="clock" class="w-4 h-4 text-blue-400 shrink-0 mt-0.5"></i>
+                  <span class="text-gray-300"><strong>Prazo:</strong> ${pkg.deadline}</span>
+                </div>
               </div>
             </div>
+
+            <button onclick="openPackageModal('${pkg.id}')" class="w-full py-3 bg-gray-900 hover:bg-blue-600 text-white font-semibold rounded-xl border border-blue-950 hover:border-blue-600 transition-all text-center">
+              Saiba mais
+            </button>
           </div>
-
-          <button onclick="openPackageModal('${pkg.id}')" class="w-full py-3 bg-gray-900 hover:bg-blue-600 text-white font-semibold rounded-xl border border-gray-800 hover:border-blue-600 transition-all text-center">
-            Saiba mais
-          </button>
-        </div>
-      `).join('');
-
+        `).join('');
+      }
       lucide.createIcons();
     }
 
+    // Efeito de distorção de lente gravitacional ao entrar no site
     function enterSite() {
       const portal = document.getElementById('intro-portal');
-      portal.style.opacity = '0';
-      setTimeout(() => portal.classList.add('hidden'), 1000);
-    }
-
-    function skipIntro() {
-      enterSite();
+      if (portal) {
+        portal.style.transform = 'scale(1.3)';
+        portal.style.filter = 'blur(20px) contrast(200%)';
+        portal.style.opacity = '0';
+        setTimeout(() => portal.classList.add('hidden'), 1000);
+      }
     }
 
     function openPackageModal(id) {
@@ -464,12 +460,10 @@
       document.getElementById('pkg-modal-features').innerHTML = `
         <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-blue-400"></i> ${pkg.deliverables}</li>
         <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-blue-400"></i> Prazo estimado: ${pkg.deadline}</li>
-        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-blue-400"></i> Suporte e alinhamento direto via WhatsApp</li>
+        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-blue-400"></i> Alinhamento direto via WhatsApp</li>
       `;
 
-      const encodedMsg = encodeURIComponent(pkg.whatsappMsg);
-      document.getElementById('pkg-whatsapp-btn').href = `https://wa.me/558193858571?text=${encodedMsg}`;
-
+      document.getElementById('pkg-whatsapp-btn').href = `https://wa.me/558193858571?text=${encodeURIComponent(pkg.whatsappMsg)}`;
       document.getElementById('package-modal').classList.remove('hidden');
       lucide.createIcons();
     }
@@ -521,7 +515,7 @@
 
     function saveAdminChanges() {
       const data = getData();
-      data.aboutTitle = document.getElementById('admin-about-title'].value;
+      data.aboutTitle = document.getElementById('admin-about-title').value;
       data.aboutText = document.getElementById('admin-about-text').value;
 
       data.packages.forEach((pkg, idx) => {
@@ -534,7 +528,7 @@
 
       saveData(data);
       closeAdminModal();
-      alert('Alterações salvas com sucesso!');
+      alert('Alterações salvas com sucesso no horizonte de eventos!');
     }
 
     function handleContactSubmit(e) {
@@ -542,11 +536,9 @@
       const alertBox = document.getElementById('form-alert');
       alertBox.classList.remove('hidden', 'bg-red-900/50', 'text-red-300', 'bg-green-900/50', 'text-green-300');
       alertBox.classList.add('bg-green-900/50', 'text-green-300', 'border', 'border-green-800');
-      alertBox.textContent = 'Mensagem enviada com sucesso! A equipe Kairos entrará em contato em breve.';
+      alertBox.textContent = 'Transmissão bem-sucedida! A equipe Kairos entrará em contato.';
       document.getElementById('contact-form').reset();
     }
-
-    renderSiteContent();
   </script>
 </body>
 </html>
